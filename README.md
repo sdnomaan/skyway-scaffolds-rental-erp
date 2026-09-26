@@ -2,7 +2,7 @@
 
 # Skyway ERP
 
-**A production rental management system built for my family's scaffolding rental company in the UAE, covering the full business lifecycle from client onboarding to VAT reporting.**
+**A production rental management system built for a scaffolding rental company in the UAE, covering the full business lifecycle from client onboarding to VAT reporting.**
 
 ![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
@@ -26,7 +26,7 @@
 
 | | |
 |---|---|
-| **Built for** | My family's scaffolding rental company, UAE |
+| **Built for** | Scaffolding rental company, UAE |
 | **Status** | Live in production, used daily |
 | **Problem** | Quotes, deliveries, invoices and payments lived in spreadsheets and paper |
 | **Solution** | One system covering the full rental cycle, with UAE VAT built in |
