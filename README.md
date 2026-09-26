@@ -187,8 +187,7 @@ Cheque, bank transfer and cash tracking, with payment promises due and bounced-c
 
 ## Author
 
-**Syed Nomaan Uddin**, AI & Data Science Engineer, Hyderabad, India. Open to junior AI/ML roles in the UAE and Gulf region.
-
-[LinkedIn](#) · [Email](mailto:syednomaan.work@gmail.com) · [GitHub](#)
+**Syed Nomaan Uddin**
+[LinkedIn](www.linkedin.com/in/syednomaanuddin523) · [Email](mailto:syednomaan.work@gmail.com) · 
 
 *Source is private. Available for walkthrough or screen-share on request.*
