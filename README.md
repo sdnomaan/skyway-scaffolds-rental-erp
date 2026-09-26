@@ -2,7 +2,7 @@
 
 # Skyway ERP
 
-**A production rental management system built for scaffolding rental company in the UAE, covering the full business lifecycle from client onboarding to VAT reporting.**
+**A production rental management system built for a scaffolding rental company in the UAE, covering the full business lifecycle from client onboarding to VAT reporting.**
 
 ![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
@@ -158,24 +158,37 @@ The full table list, RPC groups and scheduled jobs are in [`docs/schema.md`](doc
 
 > Client names, prices and VAT numbers are blurred or replaced.
 
-| Dashboard | Quotation |
-|---|---|
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Quotation](docs/screenshots/quotation.png) |
+### Dashboard
+Live KPIs for revenue, outstanding balances, active rentals, overdue invoices, expiry alerts and VAT payable, with pending deliveries and rental alerts below.
 
-| Invoice | VAT Report |
-|---|---|
-| ![Invoice](docs/screenshots/invoice.png) | ![VAT Report](docs/screenshots/vat-report.png) |
+<img src="docs/screenshots/dashboard.png" alt="Dashboard" width="100%"/>
 
-| Aging Report | Utilization |
-|---|---|
-| ![Aging](docs/screenshots/aging.png) | ![Utilization](docs/screenshots/utilization.png) |
+### UAE VAT Return (Form 201)
+Box-by-box VAT return for any quarter, with an audit-readiness checklist, output VAT detail per invoice, and recoverable input VAT from expenses. Exports to CSV.
+
+<img src="docs/screenshots/vat-report.png" alt="VAT Return" width="100%"/>
+
+### Quotation builder
+Line-item entry with automatic VAT and a live preview of the customer-facing quotation.
+
+<img src="docs/screenshots/quotation.png" alt="New quotation" width="100%"/>
+
+### Invoices
+Rental and sales invoices with paid, balance and status tracking. Paid invoices are locked, and financial records are never deleted.
+
+<img src="docs/screenshots/invoices.png" alt="Invoices" width="100%"/>
+
+### Payments
+Cheque, bank transfer and cash tracking, with payment promises due and bounced-cheque monitoring.
+
+<img src="docs/screenshots/payments.png" alt="Payments" width="100%"/>
 
 ---
 
 ## Author
 
-**Syed Nomaan Uddin**, AI & Data Science Engineer, Hyderabad, India. Open to junior AI/ML roles in the UAE and Gulf region.
+**Syed Nomaan Uddin**,.
 
-[LinkedIn](#) · [Email](mailto:syednomaan.work@gmail.com) · [GitHub](#)
+[LinkedIn](https://www.linkedin.com/in/syednomaanuddin523/) · [Email](mailto:syednomaan.work@gmail.com) · 
 
 *Source is private. Available for walkthrough or screen-share on request.*
