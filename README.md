@@ -2,7 +2,7 @@
 
 # Skyway ERP
 
-**A production rental management system built for a scaffolding rental company in the UAE, covering the full business lifecycle from client onboarding to VAT reporting.**
+**A production rental management system built for scaffolding rental company in the UAE, covering the full business lifecycle from client onboarding to VAT reporting.**
 
 ![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
@@ -30,7 +30,8 @@
 | **Status** | Live in production, used daily |
 | **Problem** | Quotes, deliveries, invoices and payments lived in spreadsheets and paper |
 | **Solution** | One system covering the full rental cycle, with UAE VAT built in |
-| **Database** | 38 business tables, 100+ SQL functions, role-based Row Level Security |
+| **Frontend** | 34 pages across rentals, finance, equipment and reporting |
+| **Database** | 49 tables, 100+ SQL functions, Row Level Security on every table |
 | **Quality** | 80/80 automated tests passing; 39-issue security and bug audit |
 
 ## The business problem
@@ -96,7 +97,7 @@ Financial records are never deleted; they change status only. Every transition i
 
 **Access control**
 - Five roles: `owner`, `manager`, `accountant`, `driver`, `viewer`
-- Role-based Row Level Security enforced in the database
+- Row Level Security on every table, with role-based policies enforced in the database
 - Owner approval required before new user accounts activate
 
 ---
@@ -105,7 +106,7 @@ Financial records are never deleted; they change status only. Every transition i
 
 <img src="docs/architecture.svg" alt="System architecture" width="100%"/>
 
-The frontend never joins tables directly. All aggregation, status logic and VAT calculation lives in Postgres RPCs and views.
+Business rules such as VAT, status changes, and quote-to-invoice conversion live in Postgres RPCs and views, so they behave the same whichever screen triggers them.
 
 ---
 
@@ -117,31 +118,25 @@ Quote conversion, invoice creation and inventory status updates run inside singl
 ### Server-side VAT
 UAE 5% VAT is calculated inside the RPC on every insert and update, not in JavaScript. VAT figures stay consistent regardless of which client or API path created the record.
 
-### Four scheduled database jobs
-
-| Schedule | Job |
-|---|---|
-| Every hour | Expire quotations past their validity and release reserved units back to `available` |
-| Every day | Mark overdue invoices |
-| Every day | Trigger the automated backup (Edge Function) |
-| Every 1 Jan | Create next year's partitions for the three partitioned tables |
+### Scheduled quotation expiry
+A `pg_cron` job runs daily at 01:00 UTC and expires quotations past their validity. Expiry releases the units reserved against a quotation, so equipment does not stay blocked by quotes nobody acted on.
 
 ### Partitioned shadow tables
-`invoices`, `quotations` and `deliveries` have `_partitioned` shadow tables using PostgreSQL range partitioning by `created_at`. Child tables are pre-built through 2030, and the annual job creates the next year's automatically. They are built alongside the live tables because Supabase does not support in-place `PARTITION BY` conversion. Cutover is a planned rename swap.
+`invoices`, `quotations` and `deliveries` have `_partitioned` shadow tables using PostgreSQL range partitioning by `created_at`, with yearly child tables pre-built through 2044. They are built alongside the live tables because Supabase does not support in-place `PARTITION BY` conversion. Cutover is a planned rename swap.
 
 ### Immutable financial records
-Financial records are never deleted; they change status only. Changes are written to an append-only audit log.
+Financial records are never deleted; they change status only. Activity is logged by database triggers on the core tables, and a trigger on the audit log blocks any update or delete, so the history is append-only.
 
 ### Quality baseline
 - 80 automated tests passing (80/80)
 - 39-issue security and bug audit
-- Two-layer React `ErrorBoundary`, at app root and per page, so a broken module cannot crash the whole application
+- React `ErrorBoundary` at the app root, so a rendering error shows a recovery screen instead of a blank page
 
 ---
 
 ## Database at a glance
 
-**38 business tables** across six domains (clients and users, equipment, rental lifecycle, finance, inventory, audit), plus partitioned shadow tables reserved for future cutover.
+**49 tables** across rentals, sales, finance, equipment, inventory and audit, plus partitioned shadow tables reserved for future cutover.
 
 The full table list, RPC groups and scheduled jobs are in [`docs/schema.md`](docs/schema.md).
 
@@ -153,7 +148,7 @@ The full table list, RPC groups and scheduled jobs are in [`docs/schema.md`](doc
 |---|---|
 | Frontend | React 19 + Vite, Tailwind |
 | State | Zustand + React Query |
-| Backend | Supabase: PostgreSQL, Auth, Storage, Edge Functions (Deno / TypeScript) |
+| Backend | Supabase: PostgreSQL, Auth, Storage |
 | Automation | pg_cron |
 | Deploy | Vercel |
 
