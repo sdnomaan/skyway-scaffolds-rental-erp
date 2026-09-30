@@ -188,6 +188,6 @@ Cheque, bank transfer and cash tracking, with payment promises due and bounced-c
 ## Author
 
 **Syed Nomaan Uddin**
-[LinkedIn](www.linkedin.com/in/syednomaanuddin523) · [Email](mailto:syednomaan.work@gmail.com) · 
+[LinkedIn]( ttps://www.linkedin.com/in/syednomaanuddin523?utm_source=share_via&utm_content=profile&utm_medium=member_android) · [Email](mailto:syednomaan.work@gmail.com) · 
 
 *Source is private. Available for walkthrough or screen-share on request.*
